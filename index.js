@@ -1,84 +1,57 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-const createPlayer = (name, token) => ({ name, token });
 const gameBoard = (() => {
-  const board = [];
-
-  const playerOne = createPlayer('Player One', 'X');
-  const playerTwo = createPlayer('Player Two', 'O');
+  const board = ['', '', '', '', '', '', '', '', ''];
 
   // eslint-disable-next-line no-plusplus
-
-  // creates blank array for board
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < 9; i++) {
-    board.push('');
-  }
+
+  // eslint-disable-next-line no-plusplus
 
   const squares = document.querySelector('.squares');
 
   // creates gameboard and displays to UI
-  board.forEach(() => {
-    const square = document.createElement('div');
-    // eslint-disable-next-line no-use-before-define, no-useless-concat
-    const text = document.createTextNode('');
-    square.className = 'square';
-    squares.appendChild(square);
-    square.appendChild(text);
-  });
 
   // adds eventlistener to square to enable update to board
   Array.from(squares.children).forEach((square, index) => {
     square.addEventListener('click', () => {
       // eslint-disable-next-line no-param-reassign, no-useless-concat
-      square.innerHTML = `${playerOne.token}` + `${playerTwo.token}`;
+      board.innerHTML = `${index}`;// depending on square clicked, push to board array
+      console.log(board);
     });
   });
   // eslint-disable-next-line no-plusplus
   console.log(board);
   // eslint-disable-next-line no-undef
-  // const squares = querySelectorAll('.squares');
-  return { board };
 });
+  // eslint-disable-next-line no-undef
+const board = ['', '', '', '', '', '', '', '', ''];
 
-const playMove = () => {
-  console.log('hello');
-};
-playMove();
-// eslint-disable-next-line no-undef
-const board = gameBoard();
-
-// gameController object here
+const createPlayer = (name, token) => ({ name, token });
 
 const gameController = (() => {
-// eslint-disable-next-line max-len
-// function to switch turns, function to getactiveplayer, function to check winner, function to playround
-
+  // eslint-disable-next-line max-len
+  // function to switch turns, function to getactiveplayer, function to check winner, function to playround
   const playerOne = createPlayer('Player One', 'X');
-  const playerTwo = createPlayer('Player One', 'X');
+  const playerTwo = createPlayer('Player Two', 'O');
+  console.log(playerOne.token);
+  let activePlayer;
+  let currentPlayerIndex;
+  let gameOver;
 
-  let activePlayer = playerOne;
-
+  function playMove() {
+    const squares = document.querySelectorAll('.boxes').forEach((boxes) => boxes.addEventListener('click', () => {
+      board.push(`${playerOne.token}`);
+      console.log(board);
+    }));
+      // eslint-disable-next-line no-plusplus
+  }
+  playMove();
   const switchPlayerTurn = () => {
-    activePlayer = activePlayer === playerOne ? playerTwo : playerOne;
   };
 
-  const getActivePlayer = () => activePlayer;
-
-  const playRound = () => {
-    // Drop a token for the current player
-    console.log(
-      `Dropping ${getActivePlayer().name}'s token into column ${board}...`,
-    );
-    board.playMove();
-  };
-  playRound();
   switchPlayerTurn();
-  getActivePlayer();
-  console.log(activePlayer);
-});
-
-const game = gameController();
+})();
 // factory function to create players
 
 // const playerOne = playerFactory('playerOne', 'X');
