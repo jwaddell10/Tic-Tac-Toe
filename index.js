@@ -18,6 +18,7 @@ const gameBoard = (() => {
       // eslint-disable-next-line no-param-reassign, no-useless-concat
       board.innerHTML = `${index}`;// depending on square clicked, push to board array
       console.log(board);
+      console.log(this.data);
     });
   });
   // eslint-disable-next-line no-plusplus
@@ -34,14 +35,27 @@ const gameController = (() => {
   // function to switch turns, function to getactiveplayer, function to check winner, function to playround
   const playerOne = createPlayer('Player One', 'X');
   const playerTwo = createPlayer('Player Two', 'O');
-  console.log(playerOne.token);
-  let activePlayer;
-  let currentPlayerIndex;
+
+  let activePlayer = playerTwo;
+  console.log(activePlayer);
+
   let gameOver;
 
+  function switchPlayers() {
+    if (activePlayer === playerOne) {
+      activePlayer = playerTwo;
+    } else {
+      activePlayer = playerOne;
+    }
+  }
+  // have it with a click, know a location and put an x there
   function playMove() {
-    const squares = document.querySelectorAll('.boxes').forEach((boxes) => boxes.addEventListener('click', () => {
-      board.push(`${playerOne.token}`);
+    const squares = document.querySelectorAll('.boxes').forEach((boxes) => boxes.addEventListener('click', (e) => {
+      console.log(e.target.id);
+      console.log(activePlayer);
+      switchPlayers();
+      board[e.target.id - 1] = activePlayer.token;
+      board.innerHTML = activePlayer.token;
       console.log(board);
     }));
       // eslint-disable-next-line no-plusplus
