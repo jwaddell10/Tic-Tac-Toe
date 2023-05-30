@@ -43,6 +43,9 @@ const gameController = (() => {
   function playMove() {
     const squares = document.querySelectorAll('.boxes').forEach((boxes) => boxes.addEventListener('click', (e) => {
       switchPlayers();
+      if (boxes.innerHTML !== '') {
+        return;
+      }
       board[e.target.id - 1] = activePlayer.token;
       // eslint-disable-next-line no-param-reassign
       boxes.innerHTML = activePlayer.token;
