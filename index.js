@@ -3,11 +3,6 @@
 const gameBoard = (() => {
   const board = ['', '', '', '', '', '', '', '', ''];
 
-  // eslint-disable-next-line no-plusplus
-  // eslint-disable-next-line no-plusplus
-
-  // eslint-disable-next-line no-plusplus
-
   const squares = document.querySelector('.squares');
 
   // creates gameboard and displays to UI
@@ -15,17 +10,13 @@ const gameBoard = (() => {
   // adds eventlistener to square to enable update to board
   Array.from(squares.children).forEach((square, index) => {
     square.addEventListener('click', () => {
-      // eslint-disable-next-line no-param-reassign, no-useless-concat
-      board.innerHTML = `${index}`;// depending on square clicked, push to board array
+      board.innerHTML = `${index}`;
       console.log(board);
       console.log(this.data);
     });
   });
-  // eslint-disable-next-line no-plusplus
   console.log(board);
-  // eslint-disable-next-line no-undef
 });
-  // eslint-disable-next-line no-undef
 const board = ['', '', '', '', '', '', '', '', ''];
 
 const createPlayer = (name, token) => ({ name, token });
@@ -36,7 +27,7 @@ const gameController = (() => {
   const playerOne = createPlayer('Player One', 'X');
   const playerTwo = createPlayer('Player Two', 'O');
 
-  let activePlayer = playerTwo;
+  let activePlayer;
   console.log(activePlayer);
 
   let gameOver;
@@ -48,81 +39,15 @@ const gameController = (() => {
       activePlayer = playerOne;
     }
   }
-  // have it with a click, know a location and put an x there
+
   function playMove() {
     const squares = document.querySelectorAll('.boxes').forEach((boxes) => boxes.addEventListener('click', (e) => {
-      console.log(e.target.id);
-      console.log(activePlayer);
       switchPlayers();
       board[e.target.id - 1] = activePlayer.token;
-      board.innerHTML = activePlayer.token;
+      // eslint-disable-next-line no-param-reassign
+      boxes.innerHTML = activePlayer.token;
       console.log(board);
     }));
-      // eslint-disable-next-line no-plusplus
   }
   playMove();
-  const switchPlayerTurn = () => {
-  };
-
-  switchPlayerTurn();
 })();
-// factory function to create players
-
-// const playerOne = playerFactory('playerOne', 'X');
-// const playerTwo = playerFactory('playerTwo', 'O');
-
-// controls flow of game
-
-/* function gameController(
-    playerOneName = "Player One",
-    playerTwoName = "Player Two",
-) {
-    const players = [
-        {
-            name: playerOneName,
-            token: 'X'
-        },
-        {
-            name: playerTwoName,
-            token: 'O'
-        }
-    ]
-
-    console.log(players)
-    let activePlayer = players[0]
-    console.log(activePlayer)
-    const switchPlayerTurn = () => {
-        for (let i = board.rows; i < board.length; i++) {
-            board[i] = [];
-        } for (let j = board.columns; j < board.length; j++) {
-            board[i].push(Cell());
-        }
-        activePlayer = activePlayer === players[0] ? players[1] : players[0];
-      };
-
-    const getActivePlayer = () => activePlayer;
-
-    switchPlayerTurn();
-    getActivePlayer();
-}
-gameController();
-
-/*const Player = (
-    playerOneName = "Player One",
-    playerTwoName = "Player Two") => {
-
-const players = () => [
-{
-    name: playerOneName,
-    token: 'X'
-},
-{
-    name: playerTwoName,
-    token: 'O'
-}
-    ]
-
-}
-console.log(Player.token) */
-
-// when cells are clicked, something can happen
