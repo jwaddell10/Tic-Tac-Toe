@@ -12,7 +12,6 @@ const game = (() => {
   const playerTwo = createPlayer('Player Two', 'O');
 
   let activePlayer;
-  console.log(activePlayer);
 
   let roundWon = false;
   let remainingSpots = 9;
@@ -75,7 +74,6 @@ const game = (() => {
         return;
       }
       game.remainingSpots -= 1;
-      console.log('checkWinner called');
       switchPlayers();
       board[e.target.id - 1] = activePlayer.token;
       // eslint-disable-next-line no-param-reassign
