@@ -61,22 +61,29 @@ const game = (() => {
     }
     // eslint-disable-next-line no-const-assign, no-constant-condition, no-cond-assign
   }
+
+  function declareTie() {
+    if (game.remainingSpots === 0) {
+      const tiedText = document.querySelector('.displaytext');
+      const tieText = document.createTextNode('It`s a tie!');
+      tiedText.appendChild(tieText);
+    }
+  }
   function setupBoard() {
     document.querySelectorAll('.boxes').forEach((boxes) => boxes.addEventListener('click', (e) => {
       if (boxes.innerHTML !== '') {
         return;
       }
+      game.remainingSpots -= 1;
       console.log('checkWinner called');
       switchPlayers();
       board[e.target.id - 1] = activePlayer.token;
       // eslint-disable-next-line no-param-reassign
       boxes.innerHTML = activePlayer.token;
       checkWinner();
+      declareTie();
       console.log(board);
     }));
-  }
-  function declareTie() {
-    console.log('its a tie!');
   }
   return {
     setupBoard,
@@ -98,11 +105,9 @@ const gameBoard = (() => {
 
   // creates gameboard and displays to UI
   game.setupBoard();
-  console.log('Setup Board is done');
   // adds eventlistener to square to enable update to board
   Array.from(squares.children).forEach(() => {
     // eslint-disable-next-line no-param-reassign
-    console.log(game.remainingSpots);
     game.checkWinner();
   });
 })();
